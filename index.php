@@ -11,8 +11,6 @@ $produk = [];
 while ($row = mysqli_fetch_assoc($result)) {
     $produk[] = $row;
 }
-
-$hapus = 0;
 ?>
 
 <!DOCTYPE html>

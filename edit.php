@@ -2,9 +2,11 @@
 
 require "functions.php";
 
-if (isset($_POST["submit"])) {
-    $insert = insertProduk($_POST);
-}
+$namaProduk = $_GET["namaProduk"];
+
+$produk = query("SELECT * FROM produk WHERE nama_produk = $namaProduk");
+
+var_dump($produk);
 
 ?>
 
@@ -19,7 +21,7 @@ if (isset($_POST["submit"])) {
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
 
-    <title>Tambah Produk</title>
+    <title>Edit Produk</title>
 </head>
 
 <body>

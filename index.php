@@ -3,7 +3,6 @@ require "functions.php";
 
 if (isset($_POST["submit"])) {
     $insert = insertProduk($_POST);
-    var_dump($insert);
 }
 
 $result = query("SELECT * FROM produk");
@@ -11,6 +10,7 @@ $produk = [];
 while ($row = mysqli_fetch_assoc($result)) {
     $produk[] = $row;
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -31,7 +31,7 @@ while ($row = mysqli_fetch_assoc($result)) {
     <div class="container mt-5">
         <h1 class="mb-4">Daftar Produk</h1>
         <a class="btn btn-primary mb-2" href="tambah-produk.php" role="button">Daftarkan produk baru</a>
-        <?php if (isset($_POST["submit"]) && $insert) : ?>
+        <?php if (isset($_POST["submit"])) : ?>
             <div class="alert alert-success mt-2" role="alert">
                 Produk baru berhasil ditambahkan!
             </div>
@@ -62,7 +62,7 @@ while ($row = mysqli_fetch_assoc($result)) {
                         <td><?= $p["harga"] ?></td>
                         <td><?= $p["jumlah"] ?></td>
                         <td class="text-center">
-                            <a class="btn btn-dark btn-sm" href="#" role="button">Edit</a>
+                            <a class="btn btn-dark btn-sm" href="edit.php?namaProduk=<?= $p["nama_produk"] ?>" role="button">Edit</a>
                             <a class="btn btn-danger btn-sm" href="hapus.php?namaProduk=<?= $p["nama_produk"] ?>" role="button">Hapus</a>
                         </td>
                     </tr>

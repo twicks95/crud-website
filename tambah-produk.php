@@ -2,9 +2,13 @@
 
 require "functions.php";
 
+$result = 0;
+
 if (isset($_POST["submit"])) {
-    $insert = insertProduk($_POST);
-}
+
+    $result = tambahProduk($_POST);
+
+};
 
 ?>
 
@@ -23,15 +27,20 @@ if (isset($_POST["submit"])) {
 </head>
 
 <body>
-
-    <form action="index.php" method="POST" class="container mt-5 col-lg-4">
+    
+    <form action="" method="POST" class="container mt-5 col-lg-4">
+        <?php if ($result > 0) : ?>
+            <div class="alert alert-success mt-2" role="alert">
+                Produk baru berhasil ditambahkan!
+            </div>
+        <?php endif; ?>
         <div class="form-group">
             <label for="nama-produk">Nama Produk</label>
             <input type="text" class="form-control" id="nama-produk" name="namaProduk">
         </div>
         <div class="form-group">
             <label for="keterangan">Deskripsi</label>
-            <textarea class="form-control" id="keterangan" rows="3" name="deskripsi"></textarea>
+            <textarea class="form-control" id="keterangan" rows="3" name="keterangan"></textarea>
         </div>
         <div class="form-group">
             <label for="harga">Harga</label>

@@ -2,11 +2,14 @@
 
 require "functions.php";
 
-$namaProduk = $_GET["namaProduk"];
+$id = $_GET["id"];
 
-$produk = query("SELECT * FROM produk WHERE nama_produk = $namaProduk");
+$produk = query("SELECT * FROM produk WHERE id = '$id'")[0];
 
-var_dump($produk);
+$result = 0;
+if (isset($_POST["submit"])) {
+    $result = updateProduk($_POST);
+}
 
 ?>
 
@@ -26,24 +29,30 @@ var_dump($produk);
 
 <body>
 
-    <form action="index.php" method="POST" class="container mt-5 col-lg-4">
+    <form action="" method="POST" class="container mt-5 col-lg-4">
+         <?php if ($result > 0) : ?>
+            <div class="alert alert-success mt-2" role="alert">
+                Data berhasil diperbarui!
+            </div>
+        <?php endif; ?>
+        <input type="hidden" name="id" value="<?= $produk["id"]; ?>">
         <div class="form-group">
             <label for="nama-produk">Nama Produk</label>
-            <input type="text" class="form-control" id="nama-produk" name="namaProduk">
+            <input type="text" class="form-control" id="nama-produk" name="namaProduk" value="<?= $produk["nama_produk"]; ?>">
         </div>
         <div class="form-group">
             <label for="keterangan">Deskripsi</label>
-            <textarea class="form-control" id="keterangan" rows="3" name="deskripsi"></textarea>
+            <textarea class="form-control" id="keterangan" rows="3" name="keterangan"><?= $produk["keterangan"]; ?></textarea>
         </div>
         <div class="form-group">
             <label for="harga">Harga</label>
-            <input type="text" class="form-control" id="harga" name="harga">
+            <input type="text" class="form-control" id="harga" name="harga" value="<?= $produk["harga"]; ?>">
         </div>
         <div class="form-group">
             <label for="jumlah">Jumlah</label>
-            <input type="text" class="form-control" id="jumlah" name="jumlah">
+            <input type="text" class="form-control" id="jumlah" name="jumlah" value="<?= $produk["jumlah"]; ?>">
         </div>
-        <button type="submit" class="btn btn-primary btn-block" name="submit">Tambahkan produk</button>
+        <button type="submit" class="btn btn-primary btn-block" name="submit">Perbarui Data</button>
         <a class="btn btn-outline-secondary btn-block" href="index.php" role="button">Kembali</a>
     </form>
 

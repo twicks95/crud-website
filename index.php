@@ -1,16 +1,7 @@
 <?php
 require "functions.php";
 
-if (isset($_POST["submit"])) {
-    $insert = insertProduk($_POST);
-}
-
-$result = query("SELECT * FROM produk");
-$produk = [];
-while ($row = mysqli_fetch_assoc($result)) {
-    $produk[] = $row;
-}
-
+$products = query("SELECT * FROM produk");
 ?>
 
 <!DOCTYPE html>
@@ -31,11 +22,6 @@ while ($row = mysqli_fetch_assoc($result)) {
     <div class="container mt-5">
         <h1 class="mb-4">Daftar Produk</h1>
         <a class="btn btn-primary mb-2" href="tambah-produk.php" role="button">Daftarkan produk baru</a>
-        <?php if (isset($_POST["submit"])) : ?>
-            <div class="alert alert-success mt-2" role="alert">
-                Produk baru berhasil ditambahkan!
-            </div>
-        <?php endif; ?>
         <?php if (@$_GET["affected-rows"] > 0) : ?>
             <div class="alert alert-danger mt-2" role="alert">
                 Data berhasil dihapus!
@@ -54,16 +40,16 @@ while ($row = mysqli_fetch_assoc($result)) {
             </thead>
             <tbody>
                 <?php $i = 1; ?>
-                <?php foreach ($produk as $p) : ?>
+                <?php foreach ($products as $product) : ?>
                     <tr>
                         <th scope="row"><?= $i ?></th>
-                        <td><?= $p["nama_produk"] ?></td>
-                        <td><?= $p["keterangan"] ?></td>
-                        <td><?= $p["harga"] ?></td>
-                        <td><?= $p["jumlah"] ?></td>
+                        <td><?= $product["nama_produk"] ?></td>
+                        <td><?= $product["keterangan"] ?></td>
+                        <td><?= $product["harga"] ?></td>
+                        <td><?= $product["jumlah"] ?></td>
                         <td class="text-center">
-                            <a class="btn btn-dark btn-sm" href="edit.php?namaProduk=<?= $p["nama_produk"] ?>" role="button">Edit</a>
-                            <a class="btn btn-danger btn-sm" href="hapus.php?namaProduk=<?= $p["nama_produk"] ?>" role="button">Hapus</a>
+                            <a class="btn btn-dark btn-sm" href="edit.php?id=<?= $product["id"] ?>" role="button">Edit</a>
+                            <a class="btn btn-danger btn-sm" href="hapus.php?id=<?= $product["id"] ?>" role="button">Hapus</a>
                         </td>
                     </tr>
                     <?php $i++ ?>

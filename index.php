@@ -2,6 +2,11 @@
 require "functions.php";
 
 $products = query("SELECT * FROM produk");
+
+if(isset($_POST["cari"])) {
+    $products = cariProduk($_POST["keyword"]);
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -22,6 +27,13 @@ $products = query("SELECT * FROM produk");
     <div class="container mt-5">
         <h1 class="mb-4">Daftar Produk</h1>
         <a class="btn btn-primary mb-2" href="tambah-produk.php" role="button">Daftarkan produk baru</a>
+        <form action="" method="POST">
+            <div class="form-group d-flex d-inline">
+                <input type="text" class="form-control w-50" name="keyword" placeholder="Cari data produk...">
+                <button type="submit" class="btn btn-light" name="cari">Cari</button>
+            </div>
+        </form>
+        <form>
         <?php if (@$_GET["affected-rows"] > 0) : ?>
             <div class="alert alert-danger mt-2" role="alert">
                 Data berhasil dihapus!

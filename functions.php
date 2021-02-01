@@ -74,3 +74,10 @@ function updateProduk($data) {
     // Mengembalikan nilai int(1) jika ada data yang berhasil ditambahkan
     return mysqli_affected_rows($db);
 }
+
+function cariProduk($keyword) {
+    $query = "SELECT * FROM produk WHERE 
+                nama_produk LIKE '%$keyword%'";
+
+    return query($query);
+}

@@ -30,7 +30,7 @@ while ($row = mysqli_fetch_assoc($result)) {
 <body>
     <div class="container mt-5">
         <h1 class="mb-4">Daftar Produk</h1>
-        <a class="btn btn-primary mb-2" href="tambah-data.php" role="button">Daftarkan produk baru</a>
+        <a class="btn btn-primary mb-2" href="tambah-produk.php" role="button">Daftarkan produk baru</a>
         <?php if (isset($_POST["submit"]) && $insert) : ?>
             <div class="alert alert-success mt-2" role="alert">
                 Produk baru berhasil ditambahkan!

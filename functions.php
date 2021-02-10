@@ -3,7 +3,7 @@
 $serverName = "localhost";
 $username = "root";
 $password = "";
-$databaseName = "arkademy_db";
+$databaseName = "arkademy";
 
 // Koneksi ke database
 $db = mysqli_connect($serverName, $username, $password, $databaseName);
